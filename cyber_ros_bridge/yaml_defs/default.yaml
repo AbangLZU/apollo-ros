@@ -1,0 +1,94 @@
+# trigger is the only supported mode now
+- mode: Trigger
+
+# Multiple topics can be mapped to one Output Topic
+# FORMAT
+# - ROS/Apollo:
+#     - Output_Topic_Name: name of the output ROS topic 
+#       msg_type: message type 
+#       Input_Topics:
+#         - Input_Topic_Name: Apollo topic name
+#           msg_type: apollo message type
+#           trigger_topic: Set to true always
+#       Input_Topics:
+#         - Input_Topic_Name: Apollo topic name
+#           msg_type: apollo message type
+#           trigger_topic: Set to true always
+
+
+    
+# These are the topics that are converted to ROS topics
+
+# These are the topics that are converted to Apollo(Cyber) topics
+- Apollo:
+#     - Output_Topic_Name: /apollo/sensor/lidar128/compensator/PointCloud2_out
+#       msg_type: apollo::drivers::PointCloud
+#       # publish_freq: 50
+#       Input_Topics:
+#         - Input_Topic_Name: /point_cloud_ros
+#           msg_type: sensor_msgs::PointCloud2
+#           trigger_topic: true
+    # - Output_Topic_Name: /apollo/sensor/gnss/imu_out
+    #   msg_type: apollo::drivers::gnss::Imu
+    #   Input_Topics:
+    #     - Input_Topic_Name: /imu
+    #       msg_type: sensor_msgs::Imu
+    #       trigger_topic: true
+ 
+- ROS:
+    # - Output_Topic_Name: /path
+    #   msg_type: nav_msgs::Path
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/planning
+    #       msg_type: apollo::planning::ADCTrajectory
+    #       trigger_topic: true
+    # - Output_Topic_Name: /odom
+    #   msg_type: nav_msgs::Odometry
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/localization/pose
+    #       msg_type: apollo::localization::LocalizationEstimate
+    #       trigger_topic: true
+
+    # - Output_Topic_Name: /hesai/front_high
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/front/high/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+
+    # - Output_Topic_Name: /hesai/front_low
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/front/low/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+    # - Output_Topic_Name: /hesai/left_front
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/left/front/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+    # - Output_Topic_Name: /hesai/left_rear
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/left/rear/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+    # - Output_Topic_Name: /hesai/right_front
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/right/front/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+    # - Output_Topic_Name: /hesai/right_rear
+    #   msg_type: sensor_msgs::PointCloud2
+    #   Input_Topics:
+    #     - Input_Topic_Name: /apollo/sensor/hesai40p/right/rear/PointCloud2
+    #       msg_type: apollo::drivers::PointCloud
+    #       trigger_topic: true 
+    - Output_Topic_Name: /front_6/image
+      msg_type: sensor_msgs::Image
+      Input_Topics:
+        - Input_Topic_Name: /apollo/sensor/camera/front_6mm/image
+          msg_type: apollo::drivers::Image
+          trigger_topic: true 

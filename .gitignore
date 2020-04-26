@@ -1,0 +1,16 @@
+#ignore files 
+bazel*
+!bazel.rc
+
+#catkin folders to ignore
+ros_pkgs/.catkin_tools
+ros_pkgs/devel
+ros_pkgs/build
+ros_pkgs/logs
+ros_pkgs/.catkin_tools
+
+!container_root
+container_root/*
+!container_root/.bashrc
+
+.vscode
