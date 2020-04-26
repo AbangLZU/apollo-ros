@@ -144,6 +144,11 @@ void cyber_ros_bridge_core::RegisterTriggerSubscribers(const Topic &topic)
   else if (topic.topic_type == "apollo::drivers::PointCloud")
   {
     // if you wanna just calibration the lidar to camera, only enable front_high
+    if(topic.topic_name=="/apollo/sensor/lidar/fusion/compensator/PointCloud2"){
+      apollo_point_cloud_reader_ = private_cyber_node_handle_ptr_->CreateReader<apollo::drivers::PointCloud>(
+        topic.topic_name, std::bind(&cyber_ros_bridge_core::ApolloPCCallback, this, std::placeholders::_1));
+    }
+
     if(topic.topic_name=="/apollo/sensor/hesai40p/front/high/PointCloud2"){
       fh_ = private_cyber_node_handle_ptr_->CreateReader<apollo::drivers::PointCloud>(
         topic.topic_name, std::bind(&cyber_ros_bridge_core::FHCallback, this, std::placeholders::_1));
@@ -203,6 +208,9 @@ void cyber_ros_bridge_core::RegisterPublishers(const Topic &topic)
   else if (topic.topic_type == "sensor_msgs::PointCloud2")
   {
     // point_cloud_pub_ = private_ros_node_handle_ptr_->advertise<sensor_msgs::PointCloud2>(topic.topic_name, 1);
+    if(topic.topic_name=="/hesai/fusion"){
+      point_cloud_pub_ = private_ros_node_handle_ptr_->advertise<sensor_msgs::PointCloud2>(topic.topic_name, 1);
+    }
     if(topic.topic_name=="/hesai/front_high"){
       fh_pub_ = private_ros_node_handle_ptr_->advertise<sensor_msgs::PointCloud2>(topic.topic_name, 1);
     }
@@ -310,8 +318,9 @@ void cyber_ros_bridge_core::ApolloPCCallback(const std::shared_ptr<apollo::drive
     // call library which converts to ros message
     sensor_msgs::PointCloud2 point_cloud;
     ApolloPCToROSPC(msg, point_cloud);
+    point_cloud.header.frame_id = "fh";
 
-    ros_data_.point_cloud.data = point_cloud;
+    // ros_data_.point_cloud.data = point_cloud;
     // publish ROS message
     point_cloud_pub_.publish(point_cloud);
   }

@@ -71,6 +71,7 @@ private:
 
   // ROS Publisher objects
   ros::Publisher point_cloud_pub_;
+  
   ros::Publisher fh_pub_;
   ros::Publisher fl_pub_;
   ros::Publisher lf_pub_;

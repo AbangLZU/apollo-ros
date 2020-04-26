@@ -49,6 +49,13 @@
     #       msg_type: apollo::localization::LocalizationEstimate
     #       trigger_topic: true
 
+    - Output_Topic_Name: /hesai/fusion
+      msg_type: sensor_msgs::PointCloud2
+      Input_Topics:
+        - Input_Topic_Name: /apollo/sensor/lidar/fusion/compensator/PointCloud2
+          msg_type: apollo::drivers::PointCloud
+          trigger_topic: true 
+
     # - Output_Topic_Name: /hesai/front_high
     #   msg_type: sensor_msgs::PointCloud2
     #   Input_Topics:
